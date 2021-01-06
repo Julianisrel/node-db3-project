@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 
 
 // READ STEPS BY SCHEME ID
-
+// : needs a value after
 router.get('/:id/steps', (req, res) => {
   const  {id}  = req.params;
 
@@ -70,12 +70,12 @@ router.post('/', (req, res) => {
 
   model.add(schemeData)
   .then(scheme => {
-    res.status(201).json({
+    return res.status(201).json({
       Success: "Scheme " + scheme + " was created successfully."
     });
   })
   .catch (err => {
-    res.status(500).json({
+    return res.status(500).json({
       Error: "Failed to create new scheme. Please check line 66"
     });
   });
@@ -92,7 +92,7 @@ model.findById(id)
   if (scheme) {
     model.addStep(stepData, id)
     .then(steps => {
-      res.status(201).json({
+      return res.status(201).json({
         Success: "Step was created successfully."
       });
     })
@@ -103,7 +103,7 @@ model.findById(id)
   }
 })
 .catch (error => {
-  res.status(500).json({
+  return res.status(500).json({
     Error: "Failed to create new step. please check your code"
   });
 });

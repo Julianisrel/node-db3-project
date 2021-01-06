@@ -37,7 +37,7 @@ function findSteps(id) {
 //* select `scheme_name`, `step_number`, `instructions,` from `steps` as `st` inner join `schemes` as `s` on `scheme_id` = `s`.`id` where `s`.`id` = 4 order by `step_number` asc
 
 function add(scheme) {
-  return db("schemes").insert(scheme);
+  return db("schemes").insert([scheme]);
 }
 //? README  Resolves to the newly inserted scheme, including `id`.
 
@@ -56,7 +56,6 @@ function remove(id) {
 
 function addStep(stepData, id) {
   return db("steps")
-  .insert(stepData)
-  .where({ id })
+  .insert([{...stepData, scheme_id: id}])
 
   }

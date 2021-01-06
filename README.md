@@ -24,9 +24,30 @@ For this lab you will
 Use a graphical tool like `SQLite Studio` to open `./data/northwind.db3` and execute the following queries:
 
 -   Display the ProductName and CategoryName for all products in the database. Returns 77 records.
+SELECT p.ProductName, c.categoryName from Product p
+JOIN Category c
+ON c.id = p.CategoryId;
+
 -   Display the order Id and shipper CompanyName for all orders placed before August 9 2012. Returns 429 records.
+SELECT o.id, s.CompanyName FROM "Order" o
+JOIN Shipper s
+ON s.id = o.ShipVia
+WHERE o.OrderDate < DATE('2012-08-09');
+
 -   Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Returns 3 records.
+SELECT p.ProductName, o.Quantity from OrderDetail o
+JOIN Product p
+ON p.id = o.ProductId
+WHERE OrderId = 10251
+ORDER BY p.ProductName;
+
 -   Display the OrderID, customer's Company Name and the employee's Last Name for every order. All columns should be labeled clearly. Returns 16,789 records.
+SELECT o.id as OrderID, c.CompanyName as CompanyName, e.LastName as LastName from "Order" o
+JOIN Customer c
+ON c.id = o.CustomerId
+JOIN Employee e
+ON e.id = o.EmployeeId
+Group by o.id;
 
 ### Database Methods
 
@@ -98,4 +119,3 @@ The following endpoints are available to test the functionality of the model met
 Follow these steps for completing your project.
 
 - [ ] Submit a pull request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request**
-
