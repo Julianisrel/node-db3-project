@@ -20,6 +20,9 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# databases
+*.db3
+
 # nyc test coverage
 .nyc_output
 
